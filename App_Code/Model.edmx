@@ -1,0 +1,682 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TurPaylasimModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAdmin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Soyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="15" />
+          <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="11" />
+          <Property Name="Durumu" Type="char" MaxLength="1" />
+          <Property Name="BaslangicTarihi" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="tblKategori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KategoriAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="KategoriAciklama" Type="nvarchar" MaxLength="300" />
+          <Property Name="Durumu" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="tblMesajlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Soyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="200" />
+          <Property Name="Mesaj" Type="nvarchar(max)" />
+          <Property Name="MesajTarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblOdeme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KartSahibi" Type="nvarchar" MaxLength="50" />
+          <Property Name="KartNo" Type="char" MaxLength="16" />
+          <Property Name="CVV" Type="char" MaxLength="3" />
+          <Property Name="SKT" Type="nchar" MaxLength="5" />
+          <Property Name="OdemeTarihi" Type="smalldatetime" />
+          <Property Name="TurId" Type="int" />
+          <Property Name="UyeId" Type="int" />
+          <Property Name="Durum" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="tblRehber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Soyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="TCKN" Type="char" MaxLength="11" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="15" />
+          <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telefon" Type="char" MaxLength="11" />
+          <Property Name="SertifikaYolu" Type="nvarchar(max)" />
+          <Property Name="Durumu" Type="char" MaxLength="1" />
+          <Property Name="UyelikTarihi" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="tblSertifikalar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="250" />
+          <Property Name="Yolu" Type="nvarchar(max)" />
+          <Property Name="Durumu" Type="char" MaxLength="1" />
+          <Property Name="RehberId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblSlider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DosyaAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="SiraNo" Type="int" />
+          <Property Name="Fotograf" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tblTur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Aciklama" Type="nvarchar(max)" />
+          <Property Name="Fiyat" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="Durumu" Type="char" MaxLength="1" />
+          <Property Name="BaslangicTarihi" Type="smalldatetime" />
+          <Property Name="BitisTarihi" Type="smalldatetime" />
+          <Property Name="OlusturulmaTarihi" Type="smalldatetime" />
+          <Property Name="TurResim" Type="nvarchar(max)" />
+          <Property Name="KategoriId" Type="int" />
+          <Property Name="RehberId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblTuraKatilanlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UyeId" Type="int" />
+          <Property Name="TurId" Type="int" />
+          <Property Name="RehberId" Type="int" />
+          <Property Name="Fiyat" Type="decimal" Precision="5" Scale="0" />
+        </EntityType>
+        <EntityType Name="tblUye">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Soyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="15" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tel" Type="varchar" MaxLength="11" />
+          <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="UyelikTarihi" Type="smalldatetime" />
+          <Property Name="Durumu" Type="char" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK_TblOdeme_TblTur">
+          <End Role="tblTur" Type="Self.tblTur" Multiplicity="0..1" />
+          <End Role="tblOdeme" Type="Self.tblOdeme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblOdeme">
+              <PropertyRef Name="TurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblOdeme_TblUye">
+          <End Role="tblUye" Type="Self.tblUye" Multiplicity="0..1" />
+          <End Role="tblOdeme" Type="Self.tblOdeme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblOdeme">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblTur_TblKategori">
+          <End Role="tblKategori" Type="Self.tblKategori" Multiplicity="0..1" />
+          <End Role="tblTur" Type="Self.tblTur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKategori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblTur">
+              <PropertyRef Name="KategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTur_tblRehber">
+          <End Role="tblRehber" Type="Self.tblRehber" Multiplicity="0..1" />
+          <End Role="tblTur" Type="Self.tblTur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRehber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblTur">
+              <PropertyRef Name="RehberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTuraKatilanlar_tblRehber">
+          <End Role="tblRehber" Type="Self.tblRehber" Multiplicity="0..1" />
+          <End Role="tblTuraKatilanlar" Type="Self.tblTuraKatilanlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRehber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblTuraKatilanlar">
+              <PropertyRef Name="RehberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblTuraKatilanlar_TblTur">
+          <End Role="tblTur" Type="Self.tblTur" Multiplicity="0..1" />
+          <End Role="tblTuraKatilanlar" Type="Self.tblTuraKatilanlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblTuraKatilanlar">
+              <PropertyRef Name="TurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblTuraKatilanlar_TblUye">
+          <End Role="tblUye" Type="Self.tblUye" Multiplicity="0..1" />
+          <End Role="tblTuraKatilanlar" Type="Self.tblTuraKatilanlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblTuraKatilanlar">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TurPaylasimModelStoreContainer">
+          <EntitySet Name="tblAdmin" EntityType="Self.tblAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKategori" EntityType="Self.tblKategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMesajlar" EntityType="Self.tblMesajlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOdeme" EntityType="Self.tblOdeme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRehber" EntityType="Self.tblRehber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSertifikalar" EntityType="Self.tblSertifikalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSlider" EntityType="Self.tblSlider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTur" EntityType="Self.tblTur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTuraKatilanlar" EntityType="Self.tblTuraKatilanlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUye" EntityType="Self.tblUye" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TblOdeme_TblTur" Association="Self.FK_TblOdeme_TblTur">
+            <End Role="tblTur" EntitySet="tblTur" />
+            <End Role="tblOdeme" EntitySet="tblOdeme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblOdeme_TblUye" Association="Self.FK_TblOdeme_TblUye">
+            <End Role="tblUye" EntitySet="tblUye" />
+            <End Role="tblOdeme" EntitySet="tblOdeme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblTur_TblKategori" Association="Self.FK_TblTur_TblKategori">
+            <End Role="tblKategori" EntitySet="tblKategori" />
+            <End Role="tblTur" EntitySet="tblTur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTur_tblRehber" Association="Self.FK_tblTur_tblRehber">
+            <End Role="tblRehber" EntitySet="tblRehber" />
+            <End Role="tblTur" EntitySet="tblTur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTuraKatilanlar_tblRehber" Association="Self.FK_tblTuraKatilanlar_tblRehber">
+            <End Role="tblRehber" EntitySet="tblRehber" />
+            <End Role="tblTuraKatilanlar" EntitySet="tblTuraKatilanlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblTuraKatilanlar_TblTur" Association="Self.FK_TblTuraKatilanlar_TblTur">
+            <End Role="tblTur" EntitySet="tblTur" />
+            <End Role="tblTuraKatilanlar" EntitySet="tblTuraKatilanlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblTuraKatilanlar_TblUye" Association="Self.FK_TblTuraKatilanlar_TblUye">
+            <End Role="tblUye" EntitySet="tblUye" />
+            <End Role="tblTuraKatilanlar" EntitySet="tblTuraKatilanlar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TurPaylasimModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAdmin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sifre" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Durumu" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="BaslangicTarihi" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tblKategori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KategoriAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KategoriAciklama" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Durumu" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tblTur" Relationship="Self.FK_TblTur_TblKategori" FromRole="tblKategori" ToRole="tblTur" />
+        </EntityType>
+        <EntityType Name="tblMesajlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Mesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MesajTarihi" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tblOdeme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KartNo" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="CVV" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="KartSahibi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SKT" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="OdemeTarihi" Type="DateTime" Precision="0" />
+          <Property Name="TurId" Type="Int32" />
+          <Property Name="UyeId" Type="Int32" />
+          <NavigationProperty Name="tblTur" Relationship="Self.FK_TblOdeme_TblTur" FromRole="tblOdeme" ToRole="tblTur" />
+          <NavigationProperty Name="tblUye" Relationship="Self.FK_TblOdeme_TblUye" FromRole="tblOdeme" ToRole="tblUye" />
+          <Property Name="Durum" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblRehber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TCKN" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="Sifre" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="SertifikaYolu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Durumu" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="UyelikTarihi" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tblTur" Relationship="Self.FK_tblTur_tblRehber" FromRole="tblRehber" ToRole="tblTur" />
+          <NavigationProperty Name="tblTuraKatilanlar" Relationship="TurPaylasimModel.FK_tblTuraKatilanlar_tblRehber" FromRole="tblRehber" ToRole="tblTuraKatilanlar" />
+        </EntityType>
+        <EntityType Name="tblSertifikalar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Yolu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Durumu" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="RehberId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblSlider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DosyaAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SiraNo" Type="Int32" />
+          <Property Name="Fotograf" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblTur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fiyat" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="Durumu" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="BaslangicTarihi" Type="DateTime" Precision="0" />
+          <Property Name="BitisTarihi" Type="DateTime" Precision="0" />
+          <Property Name="OlusturulmaTarihi" Type="DateTime" Precision="0" />
+          <Property Name="TurResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KategoriId" Type="Int32" />
+          <Property Name="RehberId" Type="Int32" />
+          <NavigationProperty Name="tblKategori" Relationship="Self.FK_TblTur_TblKategori" FromRole="tblTur" ToRole="tblKategori" />
+          <NavigationProperty Name="tblOdeme" Relationship="Self.FK_TblOdeme_TblTur" FromRole="tblTur" ToRole="tblOdeme" />
+          <NavigationProperty Name="tblRehber" Relationship="Self.FK_tblTur_tblRehber" FromRole="tblTur" ToRole="tblRehber" />
+          <NavigationProperty Name="tblTuraKatilanlar" Relationship="Self.FK_TblTuraKatilanlar_TblTur" FromRole="tblTur" ToRole="tblTuraKatilanlar" />
+        </EntityType>
+        <EntityType Name="tblTuraKatilanlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UyeId" Type="Int32" />
+          <Property Name="TurId" Type="Int32" />
+          <NavigationProperty Name="tblTur" Relationship="Self.FK_TblTuraKatilanlar_TblTur" FromRole="tblTuraKatilanlar" ToRole="tblTur" />
+          <NavigationProperty Name="tblUye" Relationship="Self.FK_TblTuraKatilanlar_TblUye" FromRole="tblTuraKatilanlar" ToRole="tblUye" />
+          <Property Name="RehberId" Type="Int32" />
+          <Property Name="Fiyat" Type="Decimal" Precision="5" Scale="0" />
+          <NavigationProperty Name="tblRehber" Relationship="TurPaylasimModel.FK_tblTuraKatilanlar_tblRehber" FromRole="tblTuraKatilanlar" ToRole="tblRehber" />
+        </EntityType>
+        <EntityType Name="tblUye">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sifre" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UyelikTarihi" Type="DateTime" Precision="0" />
+          <Property Name="Durumu" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tblOdeme" Relationship="Self.FK_TblOdeme_TblUye" FromRole="tblUye" ToRole="tblOdeme" />
+          <NavigationProperty Name="tblTuraKatilanlar" Relationship="Self.FK_TblTuraKatilanlar_TblUye" FromRole="tblUye" ToRole="tblTuraKatilanlar" />
+        </EntityType>
+        <Association Name="FK_TblTur_TblKategori">
+          <End Role="tblKategori" Type="Self.tblKategori" Multiplicity="0..1" />
+          <End Role="tblTur" Type="Self.tblTur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKategori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblTur">
+              <PropertyRef Name="KategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblOdeme_TblTur">
+          <End Role="tblTur" Type="Self.tblTur" Multiplicity="0..1" />
+          <End Role="tblOdeme" Type="Self.tblOdeme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblOdeme">
+              <PropertyRef Name="TurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblOdeme_TblUye">
+          <End Role="tblUye" Type="Self.tblUye" Multiplicity="0..1" />
+          <End Role="tblOdeme" Type="Self.tblOdeme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblOdeme">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTur_tblRehber">
+          <End Role="tblRehber" Type="Self.tblRehber" Multiplicity="0..1" />
+          <End Role="tblTur" Type="Self.tblTur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRehber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblTur">
+              <PropertyRef Name="RehberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblTuraKatilanlar_TblTur">
+          <End Role="tblTur" Type="Self.tblTur" Multiplicity="0..1" />
+          <End Role="tblTuraKatilanlar" Type="Self.tblTuraKatilanlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblTuraKatilanlar">
+              <PropertyRef Name="TurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblTuraKatilanlar_TblUye">
+          <End Role="tblUye" Type="Self.tblUye" Multiplicity="0..1" />
+          <End Role="tblTuraKatilanlar" Type="Self.tblTuraKatilanlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblTuraKatilanlar">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TurPaylasimEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAdmin" EntityType="Self.tblAdmin" />
+          <EntitySet Name="tblKategori" EntityType="Self.tblKategori" />
+          <EntitySet Name="tblMesajlar" EntityType="Self.tblMesajlar" />
+          <EntitySet Name="tblOdeme" EntityType="Self.tblOdeme" />
+          <EntitySet Name="tblRehber" EntityType="Self.tblRehber" />
+          <EntitySet Name="tblSertifikalar" EntityType="Self.tblSertifikalar" />
+          <EntitySet Name="tblSlider" EntityType="Self.tblSlider" />
+          <EntitySet Name="tblTur" EntityType="Self.tblTur" />
+          <EntitySet Name="tblTuraKatilanlar" EntityType="Self.tblTuraKatilanlar" />
+          <EntitySet Name="tblUye" EntityType="Self.tblUye" />
+          <AssociationSet Name="FK_TblTur_TblKategori" Association="Self.FK_TblTur_TblKategori">
+            <End Role="tblKategori" EntitySet="tblKategori" />
+            <End Role="tblTur" EntitySet="tblTur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblOdeme_TblTur" Association="Self.FK_TblOdeme_TblTur">
+            <End Role="tblTur" EntitySet="tblTur" />
+            <End Role="tblOdeme" EntitySet="tblOdeme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblOdeme_TblUye" Association="Self.FK_TblOdeme_TblUye">
+            <End Role="tblUye" EntitySet="tblUye" />
+            <End Role="tblOdeme" EntitySet="tblOdeme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTur_tblRehber" Association="Self.FK_tblTur_tblRehber">
+            <End Role="tblRehber" EntitySet="tblRehber" />
+            <End Role="tblTur" EntitySet="tblTur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblTuraKatilanlar_TblTur" Association="Self.FK_TblTuraKatilanlar_TblTur">
+            <End Role="tblTur" EntitySet="tblTur" />
+            <End Role="tblTuraKatilanlar" EntitySet="tblTuraKatilanlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblTuraKatilanlar_TblUye" Association="Self.FK_TblTuraKatilanlar_TblUye">
+            <End Role="tblUye" EntitySet="tblUye" />
+            <End Role="tblTuraKatilanlar" EntitySet="tblTuraKatilanlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTuraKatilanlar_tblRehber" Association="TurPaylasimModel.FK_tblTuraKatilanlar_tblRehber">
+            <End Role="tblRehber" EntitySet="tblRehber" />
+            <End Role="tblTuraKatilanlar" EntitySet="tblTuraKatilanlar" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_tblTuraKatilanlar_tblRehber">
+          <End Type="TurPaylasimModel.tblRehber" Role="tblRehber" Multiplicity="0..1" />
+          <End Type="TurPaylasimModel.tblTuraKatilanlar" Role="tblTuraKatilanlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRehber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblTuraKatilanlar">
+              <PropertyRef Name="RehberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TurPaylasimModelStoreContainer" CdmEntityContainer="TurPaylasimEntities">
+          <EntitySetMapping Name="tblAdmin">
+            <EntityTypeMapping TypeName="TurPaylasimModel.tblAdmin">
+              <MappingFragment StoreEntitySet="tblAdmin">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="BaslangicTarihi" ColumnName="BaslangicTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKategori">
+            <EntityTypeMapping TypeName="TurPaylasimModel.tblKategori">
+              <MappingFragment StoreEntitySet="tblKategori">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="KategoriAdi" ColumnName="KategoriAdi" />
+                <ScalarProperty Name="KategoriAciklama" ColumnName="KategoriAciklama" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMesajlar">
+            <EntityTypeMapping TypeName="TurPaylasimModel.tblMesajlar">
+              <MappingFragment StoreEntitySet="tblMesajlar">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+                <ScalarProperty Name="MesajTarihi" ColumnName="MesajTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOdeme">
+            <EntityTypeMapping TypeName="TurPaylasimModel.tblOdeme">
+              <MappingFragment StoreEntitySet="tblOdeme">
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="KartNo" ColumnName="KartNo" />
+                <ScalarProperty Name="CVV" ColumnName="CVV" />
+                <ScalarProperty Name="KartSahibi" ColumnName="KartSahibi" />
+                <ScalarProperty Name="SKT" ColumnName="SKT" />
+                <ScalarProperty Name="OdemeTarihi" ColumnName="OdemeTarihi" />
+                <ScalarProperty Name="TurId" ColumnName="TurId" />
+                <ScalarProperty Name="UyeId" ColumnName="UyeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRehber">
+            <EntityTypeMapping TypeName="TurPaylasimModel.tblRehber">
+              <MappingFragment StoreEntitySet="tblRehber">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="TCKN" ColumnName="TCKN" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="SertifikaYolu" ColumnName="SertifikaYolu" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="UyelikTarihi" ColumnName="UyelikTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSertifikalar">
+            <EntityTypeMapping TypeName="TurPaylasimModel.tblSertifikalar">
+              <MappingFragment StoreEntitySet="tblSertifikalar">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Yolu" ColumnName="Yolu" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="RehberId" ColumnName="RehberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSlider">
+            <EntityTypeMapping TypeName="TurPaylasimModel.tblSlider">
+              <MappingFragment StoreEntitySet="tblSlider">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DosyaAdi" ColumnName="DosyaAdi" />
+                <ScalarProperty Name="SiraNo" ColumnName="SiraNo" />
+                <ScalarProperty Name="Fotograf" ColumnName="Fotograf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTur">
+            <EntityTypeMapping TypeName="TurPaylasimModel.tblTur">
+              <MappingFragment StoreEntitySet="tblTur">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="BaslangicTarihi" ColumnName="BaslangicTarihi" />
+                <ScalarProperty Name="BitisTarihi" ColumnName="BitisTarihi" />
+                <ScalarProperty Name="OlusturulmaTarihi" ColumnName="OlusturulmaTarihi" />
+                <ScalarProperty Name="TurResim" ColumnName="TurResim" />
+                <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
+                <ScalarProperty Name="RehberId" ColumnName="RehberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTuraKatilanlar">
+            <EntityTypeMapping TypeName="TurPaylasimModel.tblTuraKatilanlar">
+              <MappingFragment StoreEntitySet="tblTuraKatilanlar">
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="RehberId" ColumnName="RehberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UyeId" ColumnName="UyeId" />
+                <ScalarProperty Name="TurId" ColumnName="TurId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUye">
+            <EntityTypeMapping TypeName="TurPaylasimModel.tblUye">
+              <MappingFragment StoreEntitySet="tblUye">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="UyelikTarihi" ColumnName="UyelikTarihi" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
