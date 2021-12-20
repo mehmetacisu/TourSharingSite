@@ -62,6 +62,6 @@ is to create.
   
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/mehmetacisuu/TourSharingSite/blob/main/LICENSE)
 
   
