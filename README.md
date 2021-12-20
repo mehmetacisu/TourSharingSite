@@ -27,6 +27,7 @@ is to create.
 - Controllable Sliders
 - Controllable Categories
 - Responsive Design
+- Admin Control System
 
 
 ## Photos
