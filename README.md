@@ -8,9 +8,9 @@ is to create.
 ### Used Technologies
 
 - Frontend 
-    * [Bootstrap](https://getbootstrap.com/)
     * HTML 
     * CSS
+    * [Bootstrap](https://getbootstrap.com/)
      - [Javascript](https://www.javascript.com/)
           * [jQuery](https://jquery.com/)
 - Backend  
