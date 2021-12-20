@@ -29,7 +29,6 @@ is to create.
 - Responsive Design
 - Admin Control System
 
-
 ## Photos
 <h6>Index</h6>
 <img src="https://i.hizliresim.com/e3vxie5.png" alt="Index"/> 
